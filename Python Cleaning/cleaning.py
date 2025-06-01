@@ -2,7 +2,7 @@ import pandas as pd
 import ast
 
 # Load the CSV
-df = pd.read_csv(r"C:\Users\Khach\Desktop\IMDB Dataset\rewards\events.csv")
+df = pd.read_csv(r"...")
 
 # Safely parse the stringified dictionaries in 'value' column
 def parse_value(val):
