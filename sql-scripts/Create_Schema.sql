@@ -26,13 +26,13 @@ CREATE TABLE raw.offers (
 );
 
 CREATE TABLE raw.customer_events (
-    event_id VARCHAR(100),
     customer_id VARCHAR(100),
     event_type VARCHAR(50),
-    event_time VARCHAR(50),
     amount VARCHAR(50),
-    offer_id VARCHAR(100),
-    reward VARCHAR(50)
+    event_time VARCHAR(50), 
+    offer_id varchar(100)
+    reward INT
+    
 );
 
 GO
@@ -41,6 +41,7 @@ DROP TABLE IF EXISTS dbo.channels;
 DROP TABLE IF EXISTS dbo.customer_events;
 DROP TABLE IF EXISTS dbo.offers;
 DROP TABLE IF EXISTS dbo.customers;
+DROP TABLE IF EXISTS dbo.customer_events_staging;
 GO
 
 CREATE TABLE dbo.customers (
@@ -59,14 +60,23 @@ CREATE TABLE dbo.offers (
     duration INT
 );
 
+CREATE TABLE dbo.customer_events_staging (
+    customer_id VARCHAR(50) NOT NULL,
+    event_type VARCHAR(50) NOT NULL,  
+    event_time INT NOT NULL,          
+    amount DECIMAL(10,2) NULL,
+    offer_id VARCHAR(50) NULL,
+    reward DECIMAL(10,2) NULL
+);
+
 CREATE TABLE dbo.customer_events (
     event_id INT IDENTITY NOT NULL PRIMARY KEY,
     customer_id VARCHAR(50) NOT NULL,
     event_type VARCHAR(50) NOT NULL,
     event_time INT NOT NULL,
-    amount DECIMAL(10,2) NOT NULL,
-    offer_id VARCHAR(50) NOT NULL,
-    reward DECIMAL(10,2) NOT NULL,
+    amount DECIMAL(10,2) NULL,
+    offer_id VARCHAR(50) NULL,
+    reward DECIMAL(10,2) NULL,
 
     FOREIGN KEY (customer_id) REFERENCES customers(customer_id),
     FOREIGN KEY (offer_id) REFERENCES offers(offer_id)
